@@ -69,7 +69,8 @@ def calculate_alarm_clock(message):
     global time_hours
     global awake_hour
     try:
-        sleep_minutes = int(time_hours) * 60 + 16
+        prepare_to_sleep_time = 16  # в среднем человек засыпает за 16 минут
+        sleep_minutes = int(time_hours) * 60 + prepare_to_sleep_time
         number_of_cycles = int(sleep_minutes / 90)
         sleep_time = int((awake_hour - (number_of_cycles * 90 / 60)) % 24)
         sleep_time_hours = str(int(sleep_time))
