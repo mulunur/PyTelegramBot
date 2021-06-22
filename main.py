@@ -10,6 +10,7 @@ name = ""
 awake_hour = ""
 time_hours = ""
 
+
 @bot.message_handler(commands=['start'])
 def command_start(message):
     bot.send_chat_action(message.chat.id, 'typing')
@@ -74,18 +75,19 @@ def calculate_alarm_clock(message):
         number_of_cycles = int(sleep_minutes / 90)
         sleep_time = int((awake_hour - (number_of_cycles * 90 / 60)) % 24)
         sleep_time_hours = str(int(sleep_time))
-        sleep_time_minutes = int(60/sleep_time%1)
+        sleep_time_minutes = int(60 / sleep_time % 1)
         if sleep_time_minutes < 10:
             sleep_time_minutes = '0' + str(sleep_time_minutes)
         sleep_time_minutes = str(sleep_time_minutes)
         sleep_time_string = sleep_time_hours + ':' + sleep_time_minutes
-        bot.send_message(message.chat.id, name + messages.sleep_time[0] + str(awake_hour) +
-                     messages.sleep_time[1] + str(time_hours) + messages.sleep_time[2] +
+        bot.send_message(message.chat.id, name + messages.sleep_time[0] +
+                         str(awake_hour) + messages.sleep_time[1] +
+                         str(time_hours) + messages.sleep_time[2] +
                          sleep_time_string + messages.sleep_time[3])
     except Exception:
-        bot.send_message(message.chat.id, messages.calculation_error + messages.ok_name)
+        bot.send_message(message.chat.id, messages.calculation_error +
+                         messages.ok_name)
         bot.register_next_step_handler(message, user_entering_time)
-
 
 
 @bot.message_handler(commands=['help'])
